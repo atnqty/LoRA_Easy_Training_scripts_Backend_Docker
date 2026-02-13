@@ -10,6 +10,7 @@ if [ ! -d "/trainer/$FORK" ] || [ ! "$(ls -A "/trainer/$FORK")" ]; then
   git clone https://github.com/$FORK/LoRA_Easy_Training_scripts_Backend.git /trainer/$FORK
   cd /trainer/$FORK
   git checkout $BRANCH
+  git submodule update --init --recursive
   python3.10 /trainer/$FORK/installer.py local
   chmod +x /trainer/$FORK/run.sh
   exec /trainer/$FORK/run.sh $ARGS
@@ -18,6 +19,7 @@ else
   cd /trainer/$FORK
   git pull
   git checkout $BRANCH
+  git submodule update --init --recursive
   chmod +x /trainer/$FORK/run.sh
   exec /trainer/$FORK/run.sh $ARGS
 fi
