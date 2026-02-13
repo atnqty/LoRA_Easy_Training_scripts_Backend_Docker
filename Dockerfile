@@ -2,6 +2,9 @@ FROM nvidia/cuda:12.1.0-devel-ubuntu22.04
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+RUN groupadd --gid 568 apps \
+    && useradd --uid 568 --gid 568 -m apps
+
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt -y --no-install-recommends install software-properties-common
 RUN add-apt-repository -y ppa:deadsnakes/ppa
