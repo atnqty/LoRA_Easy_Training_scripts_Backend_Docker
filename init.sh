@@ -3,6 +3,7 @@ echo "Starting Stable Diffusion Trainer"
 
 FORK=${FORK:-derrian-distro}
 BRANCH=${BRANCH:-main}
+PYVER=${PYVER:-3.10}
 
 if [ ! -d "/trainer/$FORK" ] || [ ! "$(ls -A "/trainer/$FORK")" ]; then
   echo "Files not found, cloning..."
@@ -11,7 +12,7 @@ if [ ! -d "/trainer/$FORK" ] || [ ! "$(ls -A "/trainer/$FORK")" ]; then
   cd /trainer/$FORK
   git checkout $BRANCH
   git submodule update --init --recursive
-  python3.10 /trainer/$FORK/installer.py local
+  python$PYVER /trainer/$FORK/installer.py local
   chmod +x /trainer/$FORK/run.sh
   exec /trainer/$FORK/run.sh $ARGS
 else
